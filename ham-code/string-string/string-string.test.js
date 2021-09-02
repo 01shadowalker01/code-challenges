@@ -12,6 +12,9 @@ const {hasOneDifferentCharacter} = require("./string-string");
 test("Should check if two strings have only one different character or more", ()=> {
     expect(hasOneDifferentCharacter("abc", "axc")).toBe(true)
     expect(hasOneDifferentCharacter("abc", "axcd")).toBe(false)
+    expect(hasOneDifferentCharacter("‫‪hamKaran‬‬", "‫‪hamkaran‬‬")).toBe(false)
+    expect(hasOneDifferentCharacter("‫‪system‬‬", "‫‪System‬‬")).toBe(false)
+    expect(hasOneDifferentCharacter("‫‪System‬M", "‫‪System‬M")).toBe(true)
 })
 
 const {replaceCharacter} = require("./string-string");
