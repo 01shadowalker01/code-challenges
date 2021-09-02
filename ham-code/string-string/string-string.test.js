@@ -7,16 +7,6 @@ test("Check two strings to see if one of them have only one extra character", ()
     // expect(hasOneExtraCharacter("system", "pystem")).toBe(true);
 })
 
-const {removeCharacterByIndex} = require("./string-string");
-
-test("Should remove character at given index", ()=> {
-    expect(removeCharacterByIndex("system", 3)).toBe("sysem")
-    expect(removeCharacterByIndex("system", 5)).toBe("syste")
-    expect(removeCharacterByIndex("abcdef", 5)).toBe("abcde")
-    expect(removeCharacterByIndex("abcdef", 0)).toBe("bcdef")
-    expect(removeCharacterByIndex("abcdef", 10)).toBe("abcdef")
-})
-
 const {hasOneDifferentCharacter} = require("./string-string");
 
 test("Should check if two strings have only one different character or more", ()=> {
@@ -30,5 +20,17 @@ test("Should check if two strings have only one different character or more", ()
     expect(replaceCharacter("abc", "x", 1)).toBe("axc")
     expect(replaceCharacter("abc", "d", 2)).toBe("abd")
     expect(replaceCharacter("abc", "d", 4)).toBe("abcd")
+    expect(replaceCharacter("system", "", 3)).toBe("sysem")
+    expect(replaceCharacter("system", "", 5)).toBe("syste")
+})
+
+const {checkSuspiciousStrings} = require("./string-string");
+
+test("Should check two list of words to find similar words count in second list compared to first list", ()=> {
+    const suspiciousWords = ["‫‪hamKaran‬‬", "‫‪system‬‬", "‫‪systemi‬‬"];
+    const wordList = ["‫‪sstem‬‬", "‫‪hamKarani‬‬", "‫‪hamkaran‬‬", "‫‪hamkarani‬‬", "‫‪pYstem‬‬", "‫‪pystem‬‬", "‫‪pystemi‬‬", "‫‪systema‬‬"]
+    const expectedResult = [1,1,1,0,0,1,1,2]
+    console.log(checkSuspiciousStrings(suspiciousWords, wordList));
+    expect(checkSuspiciousStrings(suspiciousWords, wordList)).toEqual(expectedResult)
 })
 
