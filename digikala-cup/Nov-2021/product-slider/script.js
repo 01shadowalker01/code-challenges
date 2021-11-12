@@ -20,6 +20,7 @@ const PRODUCTS = window.productsListData || [];
 
 function showProduct(product) {
   if (!product) return;
+  viewHistory.push(product);
   productCardTitle.innerHTML = product.title;
   productCardLink.setAttribute("href", product.url);
   productCardImage.setAttribute("src", product.image);
@@ -36,22 +37,52 @@ function showProduct(product) {
   } else {
     productCardDiscountContainer.classList.add("hidden");
   }
-  init();
 }
 
+let viewHistory = []
+let intervalRef;
+
 function init() {
-  // TODO: Complete this function
+  intervalRef = setInterval(showNextProduct, 4000);
 }
 
 function nextProduct() {
-  // TODO: Complete this function
+  if (intervalRef) clearInterval(intervalRef);
+  showNextProduct()
+  init()
 }
 
 function previousProduct() {
-  // TODO: Complete this function
+  if (intervalRef) clearInterval(intervalRef);
+  showPreviousProduct();
+  init();
+}
+
+function showNextProduct() {
+  let randomIndex;
+  const productCount = PRODUCTS.length -1;
+  do {
+    randomIndex = Math.floor(Math.random() * productCount);
+  } while (isInLastTwo(PRODUCTS[randomIndex].id));
+  showProduct(PRODUCTS[randomIndex]);
+}
+
+function showPreviousProduct() {
+  showProduct(PRODUCTS[PRODUCTS.length -1]);
+}
+
+function isInLastTwo(randomProductId) {
+  if (viewHistory.length < 2) return false; 
+  const lastIndex = viewHistory.length -1;
+  if (viewHistory[lastIndex].id == randomProductId
+   || viewHistory[lastIndex -1].id == randomProductId) {
+    return true;
+  }
+  return false;
 }
 
 // Start
+init();
 showProduct(PRODUCTS[PRODUCTS.length - 1]);
 // Navigation
 nextBtn.addEventListener("click", () => nextProduct());
