@@ -25,6 +25,29 @@ const shiftString = (str, leftShift) => {
     }
 }
 
+const readline = require("readline");
+var input = [];
+
+var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.prompt();
+
+rl.on('line', function (cmd) {
+
+    input.push(cmd);
+});
+
+
+rl.on('close', function (cmd) {
+    console.log(getCipherString(input[1], input[0]));
+
+    console.log(input.join('\n'));
+    process.exit(0);
+});
+
 module.exports = {
     getCipherString,
     shiftString
