@@ -77,12 +77,36 @@ game = {
         }, 0);
       });
       option.addEventListener("dragend", (e) => {
+        this.onDragEnd(e, option)
         setTimeout(() => {
           e.target.classList.remove("hidden");
         }, 0);
       });
     });
-    // TODO Implement drag and drop here
+    
+  },
+
+  onDragEnd(event, option) {
+    const hasDropedInBox = (box)=> {
+      const boxRect = box.getBoundingClientRect();
+      const {x: dropX, y: dropY} = event;
+
+      if ((dropX >= boxRect.x && dropX <= boxRect.width + boxRect.x) 
+       && dropY >= boxRect.y && dropY <=  boxRect.width + boxRect.y) {
+        return true
+      }
+      return false;
+    }
+  
+    if (hasDropedInBox(this.lighterBox)) {
+      this.lighterBox.appendChild(option);
+    } else if (hasDropedInBox(this.darkerBox)) {
+      this.darkerBox.appendChild(option);
+    }
+
+    if (this.optionsBox.children.length == 0) {
+      this.submitButton.removeAttribute("disabled");
+    }
   },
 
   submitButtonClickListener: function () {
