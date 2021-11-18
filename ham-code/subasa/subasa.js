@@ -22,4 +22,23 @@ function isValidOrder(matchInfo, goalList) {
   return "YES";
 }
 
+var readline = require("readline");
+
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+var lineno = 0;
+let inputLines = [];
+rl.on("line", function (line) {
+  lineno++;
+  inputLines.push(line);
+  if (lineno >= 2) {
+    let functionInputs = inputLines.map((line) => Number(line.split(" ")));
+    console.log(isValidOrder(functionInputs[0], functionInputs[1]));
+    rl.close();
+  }
+});
+
 module.exports = isValidOrder;
