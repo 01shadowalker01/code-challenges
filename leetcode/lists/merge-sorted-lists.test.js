@@ -1,4 +1,4 @@
-const { mergeSortedLists } = require("./merge-soretd-lists");
+const { mergeSortedLists } = require("./merge-sorted-lists");
 
 test("Should merge two sorted lists", () => {
   expect(mergeSortedLists([], [])).toEqual([]);
@@ -6,7 +6,7 @@ test("Should merge two sorted lists", () => {
   expect(mergeSortedLists([], [0])).toEqual([0]);
 });
 
-const { mergeSortedLinkedLists } = require("./merge-soretd-lists");
+const { mergeSortedLinkedLists } = require("./merge-sorted-lists");
 
 test("Should merge two sorted linked lists", () => {
   let l1, l2, resultList;
