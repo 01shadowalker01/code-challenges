@@ -7,11 +7,18 @@ submitBtn.addEventListener("click", () => {
 });
 
 function generateTriangle(count) {
+  deleteChildren(container);
   let rowList = [];
-  for (let i = 2; i <= Math.pow(2, count); i++) {
+  for (let i = 1; i <= Math.pow(2, count); i++) {
     const row = createRow();
     for (let j = 0; j < i; j++) {
-      const block = createBlock();
+      let className = "active";
+      if (i > 1 && i < Math.pow(2, count)) {
+        if (j !== 0 && j != i - 1) {
+          className = "";
+        }
+      }
+      const block = createBlock(className);
       row.appendChild(block);
     }
     rowList.push(row);
@@ -27,8 +34,16 @@ function createRow() {
   return row;
 }
 
-function createBlock() {
+function createBlock(className) {
   const div = document.createElement("div");
-  div.classList = "block active";
+  div.classList = "block " + (className || "");
   return div;
+}
+
+function deleteChildren(el) {
+  var child = el.lastElementChild;
+  while (child) {
+    el.removeChild(child);
+    child = el.lastElementChild;
+  }
 }
