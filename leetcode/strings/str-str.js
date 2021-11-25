@@ -20,6 +20,28 @@ var strStr = function (haystack, needle) {
   return -1;
 };
 
-console.log(strStr("hello", "ll"));
+/**
+ * Problem link:
+ * https://leetcode.com/problems/repeated-substring-pattern/
+ *
+ * @param {string} s
+ * @return {boolean}
+ */
+var repeatedSubstringPattern = function (term) {
+  if (term.length == 0) return true;
 
-module.exports = strStr;
+  let i = 0;
+  let subStr = term.substring(0, 1);
+  while (i < term.length / 2) {
+    let currnet = term.substring(subStr.length, subStr.length + i + 1);
+    if (subStr != currnet) {
+      i++;
+      subStr = term.substring(0, i + 1);
+    }
+  }
+  return subStr;
+};
+
+console.log(repeatedSubstringPattern("abab"));
+
+module.exports = { strStr, repeatedSubstringPattern };
