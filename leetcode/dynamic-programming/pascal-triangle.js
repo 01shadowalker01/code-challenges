@@ -6,11 +6,11 @@
  * @return {number[][]}
  */
 const generatePascalTriangle = (numRows) => {
-  triangle = [[1]];
+  let triangle = [[1]];
   for (let i = 1; i < numRows; i++) {
     if (!triangle[i]) triangle[i] = [];
 
-    for (let j = 0; j < i +1; j++) {
+    for (let j = 0; j < i + 1; j++) {
       if (j === 0 || j === i) {
         triangle[i][j] = 1;
       } else {
@@ -21,4 +21,27 @@ const generatePascalTriangle = (numRows) => {
   return triangle;
 };
 
-module.exports = { generatePascalTriangle };
+/**
+ * Problem link:
+ * https://leetcode.com/problems/pascals-triangle-ii/
+ *
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+const generatePascalTriangleNthRow = (rowIndex) => {
+  let triangleRow = [1];
+  let tempRow = [1];
+  for (let i = 1; i < rowIndex +1; i++) {
+    for (let j = 0; j < i + 1; j++) {
+      if (j === 0 || j === i) {
+        triangleRow[j] = 1;
+      } else {
+        triangleRow[j] = tempRow[j - 1] + tempRow[j];
+      }
+    }
+    tempRow = [...triangleRow];
+  }
+  return triangleRow;
+};
+
+module.exports = { generatePascalTriangle, generatePascalTriangleNthRow };
