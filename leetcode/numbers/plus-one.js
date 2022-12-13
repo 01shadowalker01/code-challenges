@@ -23,11 +23,6 @@ const addOneRecursively = (digits, index) => {
   }
 };
 
-const digits = [4,3,2,1];
-
-const result = plusOne(digits);
-console.log(result);
-
 module.exports = {
   plusOne,
 };
